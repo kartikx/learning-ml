@@ -2,6 +2,7 @@ import torch
 import input
 from model import GPT2
 from train import train_model, generate_output
+from hyperparams import block_size
 
 """
 Process:
@@ -16,10 +17,9 @@ def main():
     model = GPT2()
     train_model(model)
     # ? Why zeros in particular?
-    input_text = torch.zeros((1, 8), dtype=torch.long)
+    input_text = torch.zeros((1, block_size), dtype=torch.long)
     output = generate_output(model, input_text)
-    print("Generated: ", output)
-    print("Vocab: ", input.vocab)
+    print("Generated: \n", output)
 
 
 if __name__ == '__main__':

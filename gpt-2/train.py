@@ -39,6 +39,11 @@ def generate_output(model, input):
         # only keep the last token's logits
         output_probs = output_probs[:, -1, :]  # (B, 1, vocab_size)
         output_probs = output_probs.view(output_probs.shape[0], -1)
+
+        output_probs = torch.nan_to_num(output_probs, nan=1e-8)  # Replace NaNs
+        # Ensure no values < 0
+        output_probs = torch.clamp(output_probs, min=1e-8)
+
         next_char = torch.multinomial(output_probs, 1)  # (B, 1)
         input = torch.cat([input, next_char], dim=1)
 
