@@ -1,0 +1,10 @@
+n_embd = 128
+block_size = 8  # no. of tokens in a sample
+batch_size = 2
+dim_q = 16
+dim_k = 16
+dim_v = 16
+num_heads = 8
+num_blocks = 1
+epochs = 10000
+num_decode_steps = 500
